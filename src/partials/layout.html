@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<meta name="theme-color" content="#15171a">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-row">
+    <a class="brand" href="/">
+      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#fff" stroke-width="1.4"/><circle cx="12" cy="12" r="5.5" fill="none" stroke="#fff" stroke-width="1.4"/><circle cx="12" cy="12" r="1.4" fill="#fff"/><path d="M12 0v4M12 20v4M0 12h4M20 12h4" stroke="#fff" stroke-width="1.4"/></svg>
+      Shooting Fundamentals
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navPanel">Menu</button>
+  </div>
+  <nav class="nav-panel" id="navPanel">
+{{NAV}}
+  </nav>
+</header>
+
+<div class="install-banner" id="installBanner">
+  <span>Install this on your home screen so it works at the range with no signal.</span>
+  <span>
+    <button id="installBtn">Install</button>
+    <button class="dismiss" id="installDismiss" aria-label="Dismiss">&times;</button>
+  </span>
+</div>
+
+<main class="page">
+<div class="sheet">
+{{CONTENT}}
+<p class="disclaimer">
+  <b>Standing disclaimer:</b> this site is one new shooter&rsquo;s notes on what was explained to them &mdash; it is not instruction and not a substitute for qualified in-person instruction. Take a certified course, and always follow your local laws and your range&rsquo;s rules. It is not legal advice; firearm law varies by country, state, and municipality &mdash; see <a href="/safety/#legal">Safety &rarr; legal sources</a>.
+</p>
+</div>
+</main>
+
+<footer class="site-footer">
+  <span>Shooting Fundamentals &mdash; a new shooter&rsquo;s notes</span>
+  <span><a href="/safety/">Safety</a> &middot; <a href="https://www.nrl22.org/" target="_blank" rel="noopener">NRL22.org</a></span>
+</footer>
+
+<script src="/js/app.js" defer></script>
+</body>
+</html>

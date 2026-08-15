@@ -1,0 +1,76 @@
+<!--
+title: AB Quantum App | Shooting Fundamentals
+description: A beginner's walkthrough of Applied Ballistics' Quantum app — building a rifle profile, getting a firing solution, and pairing it with a Kestrel.
+nav: ab-quantum
+-->
+<header class="masthead">
+  <div class="kicker">Section 07 &middot; Field Tool</div>
+  <h1>AB Quantum</h1>
+  <p class="deck">Applied Ballistics' current ballistic solver app &mdash; listed as "AB Quantum" on the App Store and "Applied Ballistics Quantum" on Google Play, same app. It replaced the older Applied Ballistics Mobile app.</p>
+</header>
+
+<nav class="chipnav">
+  <a href="#what">What It Does</a>
+  <a href="#tiers">Free vs. Elite</a>
+  <a href="#setup">Building A Profile</a>
+  <a href="#pairing">Pairing With A Kestrel</a>
+</nav>
+
+<!-- 01 -->
+<section class="section" id="what">
+  <div class="section-head">
+    <span class="num">01</span>
+    <h2>What It Does</h2>
+  </div>
+  <p class="lede">It's a ballistic solver built on Applied Ballistics' Doppler-radar-derived drag models &mdash; available on iOS and Android.</p>
+  <ul class="checklist">
+    <li>Builds a rifle/ammo profile: muzzle velocity, ballistic coefficient/drag model, zero, scope height, twist rate.</li>
+    <li>Produces a firing solution &mdash; drop and wind holds &mdash; from that profile plus current conditions.</li>
+    <li>Supports truing your profile against real impacts, so the solver gets more accurate the more you shoot and correct it.</li>
+    <li>Can log data directly from a Bluetooth chronograph (e.g. an Optex SpeedTracker) into a profile, which is the more precise way to nail down your actual MV.</li>
+  </ul>
+</section>
+
+<!-- 02 -->
+<section class="section" id="tiers">
+  <div class="section-head">
+    <span class="num">02</span>
+    <h2>Free vs. Elite</h2>
+  </div>
+  <p class="lede">There are two tiers &mdash; Ultralite (free) and Elite (paid). Pricing isn't listed here since it's the kind of thing that changes; check current pricing in the app store listing.</p>
+  <div class="tip">
+    <b>Elite unlocks automatically if you're paired to an Elite-enabled Kestrel</b>
+    Owning a Kestrel 5700 or 5700X Elite unlocks Elite features in the app at no extra cost <i>while it's actively connected</i>. Some users have reported it reverting to a paywall prompt when the Kestrel isn't paired &mdash; if you see that, it's likely just the connection dropping, not a purchase being lost.
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="section" id="setup">
+  <div class="section-head">
+    <span class="num">03</span>
+    <h2>Building A Profile</h2>
+    <span class="head-note">Do This Before A Match</span>
+  </div>
+  <p class="lede">The app is only useful once a profile exists for the exact rifle and ammo combination you're shooting &mdash; this is the first-time setup, in the order it matters:</p>
+  <ol class="steps">
+    <li><b>Muzzle velocity.</b> Use a chronograph if you have one, or the Kestrel's built-in MV calibration guide (see <a href="/kestrel-5700/#mv">Kestrel 5700 Elite</a>) if you don't. Rimfire drop is unusually sensitive to MV error, so this is worth getting right before anything else.</li>
+    <li><b>Ballistic coefficient / drag model</b> for your specific ammo &mdash; usually available from the manufacturer or AB's own library.</li>
+    <li><b>Zero</b> &mdash; the distance and conditions you zeroed at.</li>
+    <li><b>Scope height</b> over bore, and twist rate.</li>
+    <li><b>True it.</b> After you've got real hits at distance, use the app's truing feature to correct the profile against what actually happened rather than trusting the math alone.</li>
+  </ol>
+  <p>Exact screen layouts change between app updates, so this is deliberately described at the level of "what you need to enter," not a click-by-click walkthrough &mdash; the app's own in-app help will match your current version better than a screenshot on this page would.</p>
+</section>
+
+<!-- 04 -->
+<section class="section" id="pairing">
+  <div class="section-head">
+    <span class="num">04</span>
+    <h2>Pairing With A Kestrel</h2>
+  </div>
+  <p class="lede">Once paired over Bluetooth to a Kestrel 5700 or 5700X Elite, the app pulls live wind and environmental data straight from the device instead of you entering it by hand, and profiles can transfer between the app and the device.</p>
+  <div class="caution">
+    <b>If a reading looks frozen or stale</b>
+    There are scattered reports of the connection appearing to stick on an old reading after pairing. Try unpairing and re-pairing rather than trusting a value that hasn't moved in a while &mdash; and cross-check against what you're actually seeing in the wind (<a href="/reading-conditions/">Reading Conditions</a>) if something feels off.
+  </div>
+</section>

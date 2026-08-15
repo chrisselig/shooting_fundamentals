@@ -1,0 +1,13 @@
+{
+  "name": "shooting-fundamentals",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A new shooter's notes on 22LR fundamentals for NRL22 — static site.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/build.mjs && npx --yes serve public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,91 @@
+<!--
+title: Kestrel 5700 Elite | Shooting Fundamentals
+description: A beginner's walkthrough of the Kestrel 5700 / 5700X Elite weather meter — what it measures, how it fits your wind bracket, and how it pairs with AB Quantum.
+nav: kestrel-5700
+-->
+<header class="masthead">
+  <div class="kicker">Section 06 &middot; Field Tool</div>
+  <h1>Kestrel 5700 Elite</h1>
+  <p class="deck">A handheld weather meter with Applied Ballistics' solver built in. It doesn't replace the reads on <a href="/reading-conditions/">Reading Conditions</a> &mdash; it's faster once you already understand what those reads are telling you.</p>
+</header>
+
+<nav class="chipnav">
+  <a href="#which">5700 vs. 5700X</a>
+  <a href="#measures">What It Measures</a>
+  <a href="#mv">Muzzle Velocity</a>
+  <a href="#workflow">Using It At The Line</a>
+  <a href="#apps">Which App Does What</a>
+</nav>
+
+<!-- 01 -->
+<section class="section" id="which">
+  <div class="section-head">
+    <span class="num">01</span>
+    <h2>5700 Elite vs. 5700X Elite</h2>
+  </div>
+  <p class="lede">Two current models, same core sensors. Check which one you actually have before you go looking for a feature &mdash; the difference matters for one specific thing.</p>
+  <ul class="checklist">
+    <li><b>Kestrel 5700 Elite</b> &mdash; the base model. Runs the full Applied Ballistics solver on-device out of the box.</li>
+    <li><b>Kestrel 5700X Elite</b> &mdash; same sensors, faster processor, adjustable Bluetooth strength. Per Kestrel's own FAQ, only the 5700X can add <b>WEZ (Weapon Employment Zone) analysis</b> as a paid unlock &mdash; the base 5700 Elite doesn't have the processing headroom for it and can't be upgraded to add it later.</li>
+  </ul>
+  <p>For NRL22 at typical match distances, WEZ analysis (a long-range hit-probability tool) isn't the feature that matters day to day &mdash; the wind/environment reading and solver underneath both models are the same.</p>
+</section>
+
+<!-- 02 -->
+<section class="section" id="measures">
+  <div class="section-head">
+    <span class="num">02</span>
+    <h2>What It Actually Measures</h2>
+  </div>
+  <ul class="checklist">
+    <li>Wind speed &amp; direction</li>
+    <li>Temperature, humidity, heat index</li>
+    <li>Pressure, and pressure/density altitude</li>
+  </ul>
+  <p>All of that feeds Applied Ballistics' solver on the device itself, so it can output an actual firing solution (drop and wind hold), not just raw weather numbers you'd have to plug into something else.</p>
+  <div class="tip">
+    <b>Neither Kestrel nor Applied Ballistics markets this toward rimfire specifically</b>
+    It's pitched generically at long-range shooters. The framing on this page &mdash; that wind and muzzle velocity accuracy matter a lot for 22LR &mdash; is this site's own editorial take, not a manufacturer claim.
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="section" id="mv">
+  <div class="section-head">
+    <span class="num">03</span>
+    <h2>Muzzle Velocity Calibration</h2>
+    <span class="head-note">Worth Doing</span>
+  </div>
+  <p class="lede">The 5700 Elite line includes a built-in muzzle velocity calibration guide, which lets you true up your rifle's actual MV without owning a separate chronograph.</p>
+  <p>This matters more for 22LR than it might seem. Rimfire drop is steep and its trajectory is disproportionately sensitive to small MV errors compared to a fast centerfire round &mdash; a wrong MV assumption throws your dope off at exactly the distances NRL22 targets sit at. Run the calibration guide, and re-run it if you change ammo lots.</p>
+</section>
+
+<!-- 04 -->
+<section class="section" id="workflow">
+  <div class="section-head">
+    <span class="num">04</span>
+    <h2>Using It At The Line</h2>
+    <span class="head-note">Conceptual Workflow</span>
+  </div>
+  <p class="lede">Exact menu screens change between firmware versions, so this is the shape of the workflow rather than a tap-by-tap guide &mdash; check your unit's current menu if a step doesn't match.</p>
+  <ol class="steps">
+    <li>Power on and let it settle for a real-time reading rather than reading it the instant you turn it on.</li>
+    <li>Hold it so the wind vane/impeller is actually exposed to the wind, not blocked by your body or the barricade.</li>
+    <li>Watch the wind reading over the same 1&ndash;2 minutes you'd use to build a bracket by eye (see <a href="/reading-conditions/#bracket">Reading Conditions &rarr; Wind Bracket</a>) &mdash; the meter is a faster, more precise version of that same lull/gust observation, not a replacement for watching the conditions.</li>
+    <li>With a profile set up (see <a href="/ab-quantum/">AB Quantum</a>), the solver gives you a hold directly from the current reading.</li>
+  </ol>
+</section>
+
+<!-- 05 -->
+<section class="section" id="apps">
+  <div class="section-head">
+    <span class="num">05</span>
+    <h2>Which App Does What</h2>
+  </div>
+  <p class="lede">Two different apps pair with the device over Bluetooth, for two different jobs &mdash; easy to mix up when you're new to it.</p>
+  <ul class="checklist">
+    <li><b>Kestrel LiNK Ballistics (KLB)</b> &mdash; firmware updates and device settings, like renaming the unit.</li>
+    <li><b><a href="/ab-quantum/">AB Quantum</a></b> &mdash; your rifle/ammo profile and the actual firing solution, pulling live weather from the Kestrel once paired.</li>
+  </ul>
+  <p>A USB LiNK dongle is also sold separately if you'd rather tether to a computer than pair over Bluetooth.</p>
+</section>
