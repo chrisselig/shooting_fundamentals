@@ -1,6 +1,6 @@
 <!--
 title: Kestrel 5700 Elite | Shooting Fundamentals
-description: A beginner's walkthrough of the Kestrel 5700 / 5700X Elite weather meter — what it measures, how it fits your wind bracket, and how it pairs with AB Quantum.
+description: A beginner's walkthrough of the Kestrel 5700 / 5700X Elite weather meter — the device layout, what it measures, muzzle velocity calibration, and how it pairs with AB Quantum.
 nav: kestrel-5700
 -->
 <header class="masthead">
@@ -11,6 +11,7 @@ nav: kestrel-5700
 
 <nav class="chipnav">
   <a href="#which">5700 vs. 5700X</a>
+  <a href="#device">The Device</a>
   <a href="#measures">What It Measures</a>
   <a href="#mv">Muzzle Velocity</a>
   <a href="#workflow">Using It At The Line</a>
@@ -32,9 +33,106 @@ nav: kestrel-5700
 </section>
 
 <!-- 02 -->
-<section class="section" id="measures">
+<section class="section" id="device">
   <div class="section-head">
     <span class="num">02</span>
+    <h2>The Device</h2>
+    <span class="head-note">Schematic, Not A Photo</span>
+  </div>
+  <p class="lede">Seven buttons and two ways of reading the screen. This is a schematic of the layout and navigation logic &mdash; not a literal render, and firmware updates can shuffle menu wording without changing this underlying shape.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 300 340" width="300" height="340" role="img" aria-labelledby="kestrelDeviceTitle">
+      <title id="kestrelDeviceTitle">Schematic of the Kestrel 5700 Elite's impeller, display, and button layout</title>
+      <rect x="40" y="10" width="180" height="320" rx="14" fill="none" stroke="#15171a" stroke-width="2"/>
+      <circle cx="130" cy="48" r="24" fill="none" stroke="#2e4a5b" stroke-width="2"/>
+      <g stroke="#2e4a5b" stroke-width="1.4">
+        <line x1="130" y1="48" x2="130" y2="28"/>
+        <line x1="130" y1="48" x2="147" y2="37"/>
+        <line x1="130" y1="48" x2="147" y2="59"/>
+        <line x1="130" y1="48" x2="130" y2="68"/>
+        <line x1="130" y1="48" x2="113" y2="59"/>
+        <line x1="130" y1="48" x2="113" y2="37"/>
+      </g>
+      <text x="130" y="86" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.5" letter-spacing=".04em" fill="#5c6268">IMPELLER — WIND SPEED</text>
+      <rect x="58" y="94" width="144" height="76" fill="#fafbfb" stroke="#c9ced3" stroke-width="1.5"/>
+      <text x="68" y="114" font-family="ui-monospace,monospace" font-size="12" font-weight="700" fill="#15171a">12.4</text>
+      <text x="68" y="124" font-family="ui-monospace,monospace" font-size="6.5" fill="#5c6268">MPH</text>
+      <text x="68" y="140" font-family="ui-monospace,monospace" font-size="8.5" fill="#15171a">270&deg; W</text>
+      <text x="68" y="156" font-family="ui-monospace,monospace" font-size="7" fill="#5c6268">68&deg;F &middot; 41% RH</text>
+      <text x="130" y="184" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.5" letter-spacing=".04em" fill="#5c6268">DISPLAY</text>
+      <circle cx="130" cy="228" r="32" fill="none" stroke="#15171a" stroke-width="1.5"/>
+      <circle cx="130" cy="228" r="10" fill="none" stroke="#2e4a5b" stroke-width="1.5"/>
+      <text x="130" y="231" text-anchor="middle" font-family="ui-monospace,monospace" font-size="5.5" fill="#2e4a5b">SEL</text>
+      <polygon points="130,200 125,209 135,209" fill="#15171a"/>
+      <polygon points="130,256 125,247 135,247" fill="#15171a"/>
+      <polygon points="102,228 111,223 111,233" fill="#15171a"/>
+      <polygon points="158,228 149,223 149,233" fill="#15171a"/>
+      <text x="130" y="272" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.5" letter-spacing=".03em" fill="#5c6268">UP/DOWN = DATA &middot; LEFT/RIGHT = SCREENS</text>
+      <g font-family="ui-monospace,monospace" font-size="6" fill="#5c6268" text-anchor="middle">
+        <circle cx="72" cy="300" r="9" fill="none" stroke="#15171a" stroke-width="1.4"/>
+        <text x="72" y="303">PWR</text>
+        <circle cx="112" cy="300" r="9" fill="none" stroke="#15171a" stroke-width="1.4"/>
+        <text x="112" y="303">OPT</text>
+        <circle cx="152" cy="300" r="9" fill="none" stroke="#15171a" stroke-width="1.4"/>
+        <text x="152" y="303">CAP</text>
+        <circle cx="192" cy="300" r="9" fill="none" stroke="#15171a" stroke-width="1.4"/>
+        <text x="192" y="303">BL</text>
+      </g>
+      <text x="130" y="322" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6" letter-spacing=".03em" fill="#5c6268">POWER &middot; OPTIONS/EXIT &middot; CAPTURE &middot; BACKLIGHT</text>
+    </svg>
+    <figcaption>Schematic layout &mdash; exact button positions vary by unit revision; the roles (power, options/exit, 5-way pad, capture, backlight) don't.</figcaption>
+  </div>
+  <p>CAPTURE does different things depending on where you are: in Weather Mode it logs a manual reading; in Ballistics Mode it toggles continuous wind capture, which is what feeds a live wind number into the solver instead of a single snapshot.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 320 230" width="320" height="230" role="img" aria-labelledby="kestrelScreensTitle">
+      <title id="kestrelScreensTitle">Diagram of Weather Mode versus Ballistics Mode navigation on the Kestrel</title>
+      <rect x="14" y="30" width="132" height="170" fill="#fafbfb" stroke="#c9ced3" stroke-width="1.5"/>
+      <text x="80" y="20" text-anchor="middle" font-family="var(--display),sans-serif" font-size="10" font-weight="700" letter-spacing=".03em" fill="#15171a">WEATHER MODE</text>
+      <g font-family="ui-monospace,monospace" font-size="7" fill="#15171a">
+        <rect x="26" y="46" width="108" height="30" fill="#fff" stroke="#c9ced3"/>
+        <text x="34" y="64">TEMP / HUMID / RH</text>
+        <rect x="26" y="84" width="108" height="30" fill="#fff" stroke="#c9ced3"/>
+        <text x="34" y="102">WIND SPD / DIR</text>
+        <rect x="26" y="122" width="108" height="30" fill="#fff" stroke="#c9ced3"/>
+        <text x="34" y="140">PRESSURE / DA</text>
+      </g>
+      <line x1="18" y1="90" x2="18" y2="110" stroke="#2e4a5b" stroke-width="1.5" marker-end="url(#arrKestrel)"/>
+      <line x1="18" y1="110" x2="18" y2="90" stroke="#2e4a5b" stroke-width="1.5" marker-end="url(#arrKestrel)"/>
+      <text x="8" y="103" font-family="ui-monospace,monospace" font-size="6" fill="#2e4a5b" transform="rotate(-90 8 103)" text-anchor="middle">UP/DN</text>
+      <line x1="140" y1="61" x2="150" y2="61" stroke="#2e4a5b" stroke-width="1.5"/>
+      <text x="80" y="182" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.5" fill="#5c6268">LEFT/RIGHT = 3 SCREENS PER ROW</text>
+
+      <rect x="174" y="14" width="132" height="200" fill="#fafbfb" stroke="#c9ced3" stroke-width="1.5"/>
+      <text x="240" y="8" text-anchor="middle" font-family="var(--display),sans-serif" font-size="10" font-weight="700" letter-spacing=".03em" fill="#15171a">BALLISTICS MODE</text>
+      <g font-family="ui-monospace,monospace" font-size="6.7" fill="#15171a">
+        <text x="184" y="32">TARGET</text>
+        <text x="184" y="52">WIND</text>
+        <text x="184" y="72">GUN</text>
+        <text x="184" y="92">ENVIRONMENT</text>
+        <text x="184" y="112">RANGE CARD</text>
+        <text x="184" y="132">TARGET CARD</text>
+        <text x="184" y="152">BALLISTICS</text>
+        <text x="184" y="172">MANAGE GUNS</text>
+      </g>
+      <line x1="180" y1="26" x2="180" y2="176" stroke="#2e4a5b" stroke-width="1.5" marker-end="url(#arrKestrel)"/>
+      <text x="240" y="196" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.5" fill="#5c6268">SCROLL = MENU</text>
+
+      <path d="M148,215 C190,236 220,236 240,220" fill="none" stroke="#2e4a5b" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#arrKestrel)"/>
+      <text x="194" y="230" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6" fill="#2e4a5b">2&times; BACKLIGHT JUMPS BACK</text>
+      <defs>
+        <marker id="arrKestrel" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L8,4 L0,8 z" fill="#2e4a5b"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Weather Mode cycles raw measurements; Ballistics Mode doubles as the menu for gun/wind/environment data and the solver's output cards.</figcaption>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="section" id="measures">
+  <div class="section-head">
+    <span class="num">03</span>
     <h2>What It Actually Measures</h2>
   </div>
   <ul class="checklist">
@@ -49,37 +147,51 @@ nav: kestrel-5700
   </div>
 </section>
 
-<!-- 03 -->
+<!-- 04 -->
 <section class="section" id="mv">
   <div class="section-head">
-    <span class="num">03</span>
+    <span class="num">04</span>
     <h2>Muzzle Velocity Calibration</h2>
     <span class="head-note">Worth Doing</span>
   </div>
-  <p class="lede">The 5700 Elite line includes a built-in muzzle velocity calibration guide, which lets you true up your rifle's actual MV without owning a separate chronograph.</p>
+  <p class="lede">The 5700 Elite line includes a built-in MV Cal Guide, which lets you true up your rifle's actual MV without owning a separate chronograph &mdash; by working backward from where your bullet actually lands.</p>
   <p>This matters more for 22LR than it might seem. Rimfire drop is steep and its trajectory is disproportionately sensitive to small MV errors compared to a fast centerfire round &mdash; a wrong MV assumption throws your dope off at exactly the distances NRL22 targets sit at. Run the calibration guide, and re-run it if you change ammo lots.</p>
-</section>
-
-<!-- 04 -->
-<section class="section" id="workflow">
-  <div class="section-head">
-    <span class="num">04</span>
-    <h2>Using It At The Line</h2>
-    <span class="head-note">Conceptual Workflow</span>
-  </div>
-  <p class="lede">Exact menu screens change between firmware versions, so this is the shape of the workflow rather than a tap-by-tap guide &mdash; check your unit's current menu if a step doesn't match.</p>
   <ol class="steps">
-    <li>Power on and let it settle for a real-time reading rather than reading it the instant you turn it on.</li>
-    <li>Hold it so the wind vane/impeller is actually exposed to the wind, not blocked by your body or the barricade.</li>
-    <li>Watch the wind reading over the same 1&ndash;2 minutes you'd use to build a bracket by eye (see <a href="/reading-conditions/#bracket">Reading Conditions &rarr; Wind Bracket</a>) &mdash; the meter is a faster, more precise version of that same lull/gust observation, not a replacement for watching the conditions.</li>
-    <li>With a profile set up (see <a href="/ab-quantum/">AB Quantum</a>), the solver gives you a hold directly from the current reading.</li>
+    <li><b>Enter your baseline data first.</b> Gun, bullet, scope, and a starting MV guess (off the box, or a rough estimate) all need to be entered before the guide has anything to calibrate against.</li>
+    <li><b>Open the guide.</b> From the Gun screen, go to the MV submenu and select Cal MV.</li>
+    <li><b>Let it suggest a distance.</b> The Kestrel proposes a calibration distance &mdash; roughly where your bullet is predicted to slow to about Mach 1.2, which is the range window where MV error shows up most clearly in drop. For best results, shoot somewhere around 85&ndash;100% of the suggested distance.</li>
+    <li><b>Shoot at that distance</b> using the drop value the Kestrel displays as your hold.</li>
+    <li><b>Enter what actually happened, not a correction.</b> If your hold predicted 5.25 mils but your actual impact was 5.5 mils low, you set Drop to 5.5 &mdash; the true observed value, not the difference between the two.</li>
+    <li><b>Apply it.</b> The Kestrel recalculates MV automatically from that entry and shows you the adjustment it made.</li>
   </ol>
+  <div class="caution">
+    <b>An MV-Temp table overrides this</b>
+    If you've built a temperature-paired MV table for your rifle (MV logged at several different temperatures), the Kestrel uses that table instead of a single calibrated MV &mdash; running Cal MV won't change anything while a table is active. You'd edit the table entries directly instead.
+  </div>
 </section>
 
 <!-- 05 -->
-<section class="section" id="apps">
+<section class="section" id="workflow">
   <div class="section-head">
     <span class="num">05</span>
+    <h2>Using It At The Line</h2>
+    <span class="head-note">Conceptual Workflow</span>
+  </div>
+  <p class="lede">Exact menu wording changes between firmware versions, so this is the shape of the workflow rather than a tap-by-tap guide &mdash; check your unit's current menu if a step doesn't match.</p>
+  <ol class="steps">
+    <li>Power on and let it settle for a real-time reading rather than reading it the instant you turn it on.</li>
+    <li>Hold it so the wind vane/impeller is actually exposed to the wind, not blocked by your body or the barricade.</li>
+    <li>In Weather Mode, watch the wind reading over the same 1&ndash;2 minutes you'd use to build a bracket by eye (see <a href="/reading-conditions/#bracket">Reading Conditions &rarr; Wind Bracket</a>) &mdash; the meter is a faster, more precise version of that same lull/gust observation, not a replacement for watching the conditions.</li>
+    <li>Switch to Ballistics Mode and confirm the active gun profile is the one you're actually shooting &mdash; the Manage Guns screen is where you swap profiles if you shoot more than one rifle.</li>
+    <li>Toggle CAPTURE to start continuous wind capture if conditions are gusty, so the solver is working off a live read rather than one snapshot.</li>
+    <li>With a profile set up (see <a href="/ab-quantum/">AB Quantum</a>), the Ballistics screen gives you a hold directly from the current reading.</li>
+  </ol>
+</section>
+
+<!-- 06 -->
+<section class="section" id="apps">
+  <div class="section-head">
+    <span class="num">06</span>
     <h2>Which App Does What</h2>
   </div>
   <p class="lede">Two different apps pair with the device over Bluetooth, for two different jobs &mdash; easy to mix up when you're new to it.</p>
@@ -88,4 +200,16 @@ nav: kestrel-5700
     <li><b><a href="/ab-quantum/">AB Quantum</a></b> &mdash; your rifle/ammo profile and the actual firing solution, pulling live weather from the Kestrel once paired.</li>
   </ul>
   <p>A USB LiNK dongle is also sold separately if you'd rather tether to a computer than pair over Bluetooth.</p>
+  <h3 style="margin-top:16px;font-size:15px;">Pairing, Step By Step</h3>
+  <ol class="steps">
+    <li>On the Kestrel: Options &rarr; Bluetooth &rarr; On.</li>
+    <li>Set the connection mode to PC/Mobile &mdash; the device's status should change to Available.</li>
+    <li>Open AB Quantum's Devices screen on your phone; it scans automatically and lists the Kestrel once it's in range and Available.</li>
+    <li>Tap the device to connect &mdash; status flips to Connected on the Kestrel and Active in the app.</li>
+    <li>If you've set a Bluetooth privacy PIN on the Kestrel, you'll be prompted for it once during this step.</li>
+  </ol>
+  <div class="tip">
+    <b>Keep it within about 100ft, line of sight</b>
+    That's the Kestrel's rated Bluetooth range. Steps 1&ndash;2 (Kestrel side) are sourced from Kestrel's own manual; step 3&ndash;4 (AB Quantum side) reflect the app's generic device-pairing flow, which is shared with other paired accessories like chronographs &mdash; the overall shape should hold for a Kestrel, but treat the exact on-screen wording as approximate.
+  </div>
 </section>

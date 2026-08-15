@@ -1,6 +1,6 @@
 <!--
 title: AB Quantum App | Shooting Fundamentals
-description: A beginner's walkthrough of Applied Ballistics' Quantum app — building a rifle profile, getting a firing solution, and pairing it with a Kestrel.
+description: A beginner's walkthrough of Applied Ballistics' Quantum app — the profile screen, the firing solution screen, truing, and pairing it with a Kestrel.
 nav: ab-quantum
 -->
 <header class="masthead">
@@ -13,6 +13,8 @@ nav: ab-quantum
   <a href="#what">What It Does</a>
   <a href="#tiers">Free vs. Elite</a>
   <a href="#setup">Building A Profile</a>
+  <a href="#screen">The Solution Screen</a>
+  <a href="#truing">Truing</a>
   <a href="#pairing">Pairing With A Kestrel</a>
 </nav>
 
@@ -51,24 +53,147 @@ nav: ab-quantum
     <h2>Building A Profile</h2>
     <span class="head-note">Do This Before A Match</span>
   </div>
-  <p class="lede">The app is only useful once a profile exists for the exact rifle and ammo combination you're shooting &mdash; this is the first-time setup, in the order it matters:</p>
+  <p class="lede">The app is only useful once a profile exists for the exact rifle and ammo combination you're shooting. It's one Profile Edit screen rather than a click-through wizard &mdash; these are the field groups, top to bottom, in the order they matter:</p>
+  <div class="diagram">
+    <svg viewBox="0 0 300 300" width="300" height="300" role="img" aria-labelledby="abProfileTitle">
+      <title id="abProfileTitle">Schematic of the AB Quantum profile edit screen's field groups, top to bottom</title>
+      <rect x="20" y="10" width="260" height="280" fill="#fafbfb" stroke="#c9ced3" stroke-width="1.5"/>
+      <g font-family="ui-monospace,monospace" fill="#15171a">
+        <rect x="34" y="22" width="232" height="26" fill="#fff" stroke="#c9ced3"/>
+        <text x="42" y="39" font-size="8">PROFILE NAME</text>
+
+        <rect x="34" y="58" width="232" height="56" fill="#fff" stroke="#2e4a5b" stroke-width="1.3"/>
+        <text x="42" y="73" font-size="8" font-weight="700">BULLET LIBRARY</text>
+        <text x="42" y="87" font-size="6.7" fill="#5c6268">CALIBER &rarr; MANUFACTURER &rarr; BULLET</text>
+        <text x="42" y="100" font-size="6.7" fill="#5c6268">DRAG MODEL: G1 / G7 / CDM (ELITE)</text>
+
+        <rect x="34" y="124" width="232" height="62" fill="#fff" stroke="#2e4a5b" stroke-width="1.3"/>
+        <text x="42" y="139" font-size="8" font-weight="700">GUN DATA</text>
+        <text x="42" y="153" font-size="6.7" fill="#5c6268">MUZZLE VELOCITY &middot; ZERO RANGE</text>
+        <text x="42" y="166" font-size="6.7" fill="#5c6268">SIGHT HEIGHT &middot; TWIST + DIRECTION</text>
+        <text x="42" y="179" font-size="6.7" fill="#5c6268">&rarr; STABILITY FACTOR (CALCULATED)</text>
+
+        <rect x="34" y="196" width="232" height="48" fill="#fff" stroke="#2e4a5b" stroke-width="1.3"/>
+        <text x="42" y="211" font-size="8" font-weight="700">SCOPE</text>
+        <text x="42" y="225" font-size="6.7" fill="#5c6268">UNITS (MIL/MOA) &middot; RETICLE</text>
+        <text x="42" y="238" font-size="6.7" fill="#5c6268">RETICLE PARAMETERS</text>
+
+        <rect x="34" y="256" width="232" height="26" fill="#fff" stroke="#c9ced3" stroke-dasharray="3 3"/>
+        <text x="42" y="273" font-size="7" fill="#5c6268">MV-TEMP TABLE (OPTIONAL)</text>
+      </g>
+      <g stroke="#2e4a5b" stroke-width="1.3" marker-end="url(#arrAB)">
+        <line x1="150" y1="48" x2="150" y2="56"/>
+        <line x1="150" y1="114" x2="150" y2="122"/>
+        <line x1="150" y1="186" x2="150" y2="194"/>
+        <line x1="150" y1="244" x2="150" y2="254"/>
+      </g>
+      <defs>
+        <marker id="arrAB" viewBox="0 0 8 8" refX="4" refY="7" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L8,0 L4,8 z" fill="#2e4a5b"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Profile Edit screen, field groups top to bottom. Solid borders are required before a solution will compute; the MV-Temp table is optional.</figcaption>
+  </div>
   <ol class="steps">
-    <li><b>Muzzle velocity.</b> Use a chronograph if you have one, or the Kestrel's built-in MV calibration guide (see <a href="/kestrel-5700/#mv">Kestrel 5700 Elite</a>) if you don't. Rimfire drop is unusually sensitive to MV error, so this is worth getting right before anything else.</li>
-    <li><b>Ballistic coefficient / drag model</b> for your specific ammo &mdash; usually available from the manufacturer or AB's own library.</li>
-    <li><b>Zero</b> &mdash; the distance and conditions you zeroed at.</li>
-    <li><b>Scope height</b> over bore, and twist rate.</li>
-    <li><b>True it.</b> After you've got real hits at distance, use the app's truing feature to correct the profile against what actually happened rather than trusting the math alone.</li>
+    <li><b>Muzzle velocity.</b> Use a chronograph if you have one, or the Kestrel's built-in MV Cal Guide (see <a href="/kestrel-5700/#mv">Kestrel 5700 Elite</a>) if you don't. Rimfire drop is unusually sensitive to MV error, so this is worth getting right before anything else.</li>
+    <li><b>Bullet &amp; drag model</b> from AB's library where your exact bullet is listed, or a custom entry if it isn't &mdash; see <a href="#nobullet">If Your Bullet Isn't Listed</a> below. G7 fits boat-tail rifle bullets better than G1 for most modern match bullets; CDM (radar-derived, built by Applied Ballistics themselves) is the most accurate option where it exists, but it only covers bullets they've already tested &mdash; you can't generate one yourself for a bullet outside their library.</li>
+    <li><b>Zero range and sight height/twist</b> &mdash; the conditions you actually zeroed at, and your scope height over bore and barrel twist direction, which the app uses to calculate a stability factor for the bullet.</li>
+    <li><b>Scope units and reticle</b> &mdash; match this to what's actually in the scope, since it drives how the solution screen displays your hold.</li>
+    <li><b>True it</b> once you have real impacts at distance &mdash; see <a href="#truing">Truing</a> below, rather than trusting the math alone.</li>
   </ol>
-  <p>Exact screen layouts change between app updates, so this is deliberately described at the level of "what you need to enter," not a click-by-click walkthrough &mdash; the app's own in-app help will match your current version better than a screenshot on this page would.</p>
+  <p>Exact field labels and screen layout can shift between app updates, so this is deliberately described at the level of "what you need to enter and roughly where," not a pixel-accurate walkthrough &mdash; the app's own in-app help will match your current version better than a diagram on this page would.</p>
+
+  <h3 id="nobullet" style="margin-top:20px;font-size:15px;">If Your Bullet Isn't Listed</h3>
+  <p class="lede">.22LR loads are exactly the kind of bullet that can come up empty in a library search &mdash; here's the fallback order, straight from Applied Ballistics' own guidance where it exists.</p>
+  <ol class="steps">
+    <li><b>Search again before assuming it's missing.</b> Check for the bullet under a slightly different manufacturer or product name &mdash; library search misses are often a naming mismatch, not an actual gap.</li>
+    <li><b>Use Add Ammo for a custom entry.</b> This lets you pick a drag model &mdash; G1, G7, or Custom &mdash; and enter the matching ballistic coefficient and bullet weight yourself.</li>
+    <li><b>G1 for flat-base bullets, G7 for boat-tail.</b> Applied Ballistics' own FAQ uses .22LR as its example: use G1 for a flat-base bullet like a standard 22LR or a flat-base varmint bullet, G7 for a boat-tail design. Use the manufacturer's published BC for that drag model if they list one.</li>
+    <li><b>Custom Drag Model (CDM) isn't something you can build.</b> CDMs are derived from Applied Ballistics' own Doppler radar testing and only exist for bullets they've already measured. If your bullet isn't in the library, CDM isn't an option for it &mdash; G1 or G7 with a manufacturer BC is the real fallback, not a lesser one.</li>
+    <li><b>Double-check the drag model and BC actually match after you change either one.</b> AB's own FAQ flags this as a common mistake &mdash; switching the drag-model selector without the BC value updating to match leaves you with a mismatched pair that won't solve correctly.</li>
+  </ol>
+  <div class="caution">
+    <b>Treat the entered BC as a starting point, not a fact</b>
+    Generic G1/G7 models fit .22LR's flat-base, heel-type shape loosely to begin with, and rimfire BC isn't constant &mdash; it decays as the bullet slows through the transonic zone, sometimes dropping by a quarter or more from its supersonic value over a normal NRL22 string of distances. A manufacturer-published BC gets you a usable starting profile, but <a href="#truing">DSF Calibration</a> &mdash; which specifically targets that transonic falloff &mdash; is doing more real work for a rimfire profile than it would for a centerfire one built on a well-fit G7.
+  </div>
 </section>
 
 <!-- 04 -->
-<section class="section" id="pairing">
+<section class="section" id="screen">
   <div class="section-head">
     <span class="num">04</span>
+    <h2>The Solution Screen</h2>
+  </div>
+  <p class="lede">Once a profile exists, this is what you're reading at the line &mdash; a range input, two solved outputs, and more detail available if you tap in.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 320 220" width="320" height="220" role="img" aria-labelledby="abSolutionTitle">
+      <title id="abSolutionTitle">Schematic of the AB Quantum firing solution screen</title>
+      <rect x="10" y="10" width="90" height="200" fill="#fafbfb" stroke="#c9ced3" stroke-width="1.3"/>
+      <text x="55" y="4" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.5" fill="#5c6268">ENVIRONMENT</text>
+      <g font-family="ui-monospace,monospace" font-size="6.3" fill="#5c6268">
+        <text x="20" y="34">TEMP</text>
+        <text x="20" y="54">HUMIDITY</text>
+        <text x="20" y="74">PRESSURE</text>
+        <text x="20" y="94">WIND SPD 1</text>
+        <text x="20" y="114">WIND SPD 2</text>
+        <text x="20" y="134">WIND DIR</text>
+      </g>
+      <text x="55" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6" fill="#5c6268">FROM PAIRED KESTREL, OR ENTERED MANUALLY</text>
+
+      <line x1="102" y1="60" x2="118" y2="60" stroke="#2e4a5b" stroke-width="1.3" marker-end="url(#arrAB2)"/>
+
+      <rect x="120" y="10" width="190" height="200" fill="#fff" stroke="#15171a" stroke-width="1.6"/>
+      <rect x="132" y="20" width="166" height="26" fill="#fafbfb" stroke="#c9ced3"/>
+      <text x="140" y="37" font-family="ui-monospace,monospace" font-size="8" fill="#15171a">RANGE  [ 380 YD  &minus; + ]</text>
+
+      <text x="175" y="80" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" font-weight="700" fill="#15171a">4.1</text>
+      <text x="175" y="92" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.5" fill="#5c6268">ELEVATION (MIL)</text>
+      <text x="255" y="80" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" font-weight="700" fill="#2e4a5b">0.6</text>
+      <text x="255" y="92" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.5" fill="#5c6268">WINDAGE (MIL)</text>
+      <line x1="215" y1="55" x2="215" y2="100" stroke="#c9ced3" stroke-width="1"/>
+
+      <rect x="132" y="112" width="166" height="22" fill="#fff" stroke="#c9ced3" stroke-dasharray="3 3"/>
+      <text x="140" y="126" font-family="ui-monospace,monospace" font-size="6.3" fill="#5c6268">&#9656; TIME OF FLIGHT &middot; CORIOLIS &middot; MACH</text>
+
+      <text x="215" y="150" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.5" fill="#5c6268">MOVING-TARGET LEAD, IF ENABLED</text>
+      <text x="215" y="196" text-anchor="middle" font-family="ui-monospace,monospace" font-size="6.3" fill="#5c6268">RANGE CARD / TARGET CARD ARE SEPARATE VIEWS</text>
+      <defs>
+        <marker id="arrAB2" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L8,4 L0,8 z" fill="#2e4a5b"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Elevation and windage are the two numbers you actually dial or hold; time of flight, Coriolis, and Mach live behind the expandable strip.</figcaption>
+  </div>
+  <p>Range card and target card are separate views built from the same profile &mdash; they add energy, time of flight, and Mach number at each range, with transonic ranges (where the bullet is slowing through the speed of sound and gets less predictable) flagged so you know which rows to trust less.</p>
+</section>
+
+<!-- 05 -->
+<section class="section" id="truing">
+  <div class="section-head">
+    <span class="num">05</span>
+    <h2>Truing</h2>
+    <span class="head-note">Two Separate Tools</span>
+  </div>
+  <p class="lede">"Truing" isn't one button &mdash; it's two different calibration tools depending on where your bullet is in its flight.</p>
+  <ul class="checklist">
+    <li><b>MV Calibration</b> &mdash; for supersonic ranges, generally 600yd and beyond (or shorter, for subsonic/rimfire loads where the bullet is already slow). After a shot, you enter the <i>true observed drop</i> &mdash; not the error, the actual value. If the app predicted a 5.25 mil hold but your real impact was at 5.5 mils, you enter 5.5 and apply it; the app back-solves an adjusted MV from that.</li>
+    <li><b>DSF Calibration</b> &mdash; for the transonic zone, where the bullet is slowing through the speed of sound and standard drag models get less reliable. This only runs from the live-fire Shoot submenu, takes up to six calibration points, and is applied separately with its own "Use DSF" step.</li>
+  </ul>
+  <div class="caution">
+    <b>Enter the real number, not a correction</b>
+    The easiest mistake here is entering how far off you were instead of where you actually landed. MV Cal wants the true observed drop value, full stop &mdash; treat it like reporting a fact, not doing the math for the app.
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="section" id="pairing">
+  <div class="section-head">
+    <span class="num">06</span>
     <h2>Pairing With A Kestrel</h2>
   </div>
-  <p class="lede">Once paired over Bluetooth to a Kestrel 5700 or 5700X Elite, the app pulls live wind and environmental data straight from the device instead of you entering it by hand, and profiles can transfer between the app and the device.</p>
+  <p class="lede">Once paired over Bluetooth to a Kestrel 5700 or 5700X Elite, the app pulls live wind and environmental data straight from the device instead of you entering it by hand, and profiles can transfer between the app and the device. Full step-by-step pairing (both sides) is on the <a href="/kestrel-5700/#apps">Kestrel 5700 Elite</a> page &mdash; short version: turn on Bluetooth on the Kestrel, set it to PC/Mobile mode, then find and tap it in AB Quantum's Devices screen.</p>
   <div class="caution">
     <b>If a reading looks frozen or stale</b>
     There are scattered reports of the connection appearing to stick on an old reading after pairing. Try unpairing and re-pairing rather than trusting a value that hasn't moved in a while &mdash; and cross-check against what you're actually seeing in the wind (<a href="/reading-conditions/">Reading Conditions</a>) if something feels off.
