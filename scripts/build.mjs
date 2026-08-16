@@ -23,6 +23,7 @@ const NAV = [
   { slug: "kestrel-5700", href: "/kestrel-5700/", label: "Kestrel 5700 Elite", n: "06" },
   { slug: "ab-quantum", href: "/ab-quantum/", label: "AB Quantum App", n: "07" },
   { slug: "bags-bipods", href: "/bags-bipods/", label: "Bags & Bipods", n: "08" },
+  { slug: "mildot-master", href: "/mildot-master/", label: "Mildot Master", n: "09" },
 ];
 
 function buildNav(activeSlug) {

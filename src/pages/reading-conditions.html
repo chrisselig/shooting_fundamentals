@@ -15,6 +15,7 @@ nav: reading-conditions
   <a href="#zoom">02 Zoom Sweet Spot</a>
   <a href="#environment">03 Environment Gauge</a>
   <a href="#bracket">04 Wind Bracket</a>
+  <a href="#hold">05 Bracket To Hold</a>
 </nav>
 
 <!-- 01 -->
@@ -151,4 +152,60 @@ nav: reading-conditions
     <b>On the clock, it's one decision</b>
     Lull hold or gust hold &mdash; not a fresh wind call for every shot. Deciding between exactly two numbers, already written down, is fast. Re-reading the wind from scratch under a shot clock is not.
   </div>
+</section>
+
+<!-- 05 -->
+<section class="section" id="hold">
+  <div class="section-head">
+    <span class="num">05</span>
+    <h2>Turning A Bracket Into A Hold</h2>
+    <span class="head-note">Application</span>
+  </div>
+  <p class="lede">Reading the wind only matters if you can turn it into a number on the reticle. Two things determine that number: how much of the wind's speed is actually hitting you side-on (its <b>value</b>), and how far the bullet has to fly through it.</p>
+
+  <h3 style="margin-top:20px;font-size:15px;">The Wind Clock</h3>
+  <p>Picture a clock face laid flat over the range, 12 pointing downrange at the target and 6 back at you. Where the wind is blowing <i>from</i> on that clock sets how much of it actually pushes your bullet sideways:</p>
+  <table>
+    <thead>
+      <tr><th>Clock position</th><th>Value</th><th>Multiplier</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>12 or 6 (head/tail wind)</td><td>No value</td><td>&times;0</td></tr>
+      <tr><td>1, 5, 7, 11 o'clock</td><td>Half value</td><td>&times;0.5</td></tr>
+      <tr><td>3 or 9 o'clock</td><td>Full value</td><td>&times;1.0</td></tr>
+    </tbody>
+  </table>
+  <p>That three-tier version (no/half/full) is the one to actually use under a shot clock &mdash; it's fast and it's what most wind-doping instruction teaches. If you want a fourth in-between step, the diagonals at 1:30/4:30/7:30/10:30 run closer to <b>three-quarter value</b> (&times;0.75) than half, but the extra precision rarely earns its keep when you're calling wind by eye.</p>
+
+  <div class="caution">
+    <b>A widely-shared "wind clock" gets this backwards</b>
+    A version circulating online (including in AI-generated answers) labels 2/4/8/10 o'clock as half value and 1/5/7/11 o'clock as quarter value. That's swapped from what long-range wind-doping instruction actually teaches, and the underlying angle math doesn't support a quarter-value tier at 1/5/7/11 in the first place. Use the table above.
+  </div>
+
+  <h3 style="margin-top:24px;font-size:15px;">A Representative Hold Table</h3>
+  <p>Below is a <b>full-value (3/9 o'clock), 10 mph</b> wind hold, computed from a typical subsonic .22LR match load (40gr, MV ~1050 fps, BC .130 G1) &mdash; the closest thing to a "generic NRL22 round." Multiply by your wind clock value, and scale roughly linearly for other wind speeds (5 mph &asymp; half this hold, 15 mph &asymp; one-and-a-half times it &mdash; that part of the physics holds up well).</p>
+  <table>
+    <thead>
+      <tr><th>Range</th><th>Full-value 10&nbsp;mph hold</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>50 yd</td><td>0.7 MIL</td></tr>
+      <tr><td>75 yd</td><td>0.9 MIL</td></tr>
+      <tr><td>100 yd</td><td>1.2 MIL</td></tr>
+      <tr><td>150 yd</td><td>1.7 MIL</td></tr>
+      <tr><td>200 yd</td><td>2.2 MIL</td></tr>
+      <tr><td>50 m</td><td>0.7 MIL</td></tr>
+      <tr><td>100 m</td><td>1.3 MIL</td></tr>
+      <tr><td>200 m</td><td>2.4 MIL</td></tr>
+      <tr><td>300 m</td><td>3.5 MIL</td></tr>
+      <tr><td>400 m</td><td>4.5 MIL</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caution">
+    <b>This table is a starting point, not your data</b>
+    Change the bullet, the muzzle velocity, or the altitude and every number here moves &mdash; a faster supersonic-loaded .22LR gave meaningfully different holds than the subsonic load above when checked against the same crosswind. Treat this as roughly what to expect walking onto a stage without a meter, then build your real numbers in <a href="/kestrel-5700/">Kestrel 5700 Elite</a> or <a href="/ab-quantum/">AB Quantum</a> and confirm them with <a href="/ab-quantum/#truing">truing</a> against actual impacts. A <a href="/mildot-master/">Mildot Master</a> covers the same ground as a battery-free backup. 300&ndash;400 m is included for completeness, not because it's a realistic NRL22 distance &mdash; at that range a subsonic .22LR has dropped so far (elevation holds well past 20 MIL from a 100-yard zero) that most scopes run out of adjustment before wind is even the limiting problem.
+  </div>
+
+  <p>Two claims worth naming and correcting, since they get repeated: wind drift does <b>not</b> scale with distance squared &mdash; going from 100 to 200 yards roughly doubles the hold, not quadruples it, because the angular MIL value divides the growing drift by the growing range. And there's no separately-named "wind formula shortcut" specific to rimfire circulating under any particular person's name &mdash; the generic range-times-wind-speed-over-a-constant shortcut long-range shooters use for centerfire doesn't have a verified constant for slow, rapidly-decelerating rimfire bullets, which is exactly why the table above comes from a full trajectory calculation instead of a mental-math shortcut.</p>
 </section>
