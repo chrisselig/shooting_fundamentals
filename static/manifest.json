@@ -1,0 +1,16 @@
+{
+  "name": "Shooting Fundamentals",
+  "short_name": "Fundamentals",
+  "description": "A new shooter's notes on 22LR fundamentals for NRL22 — safety, marksmanship, positional shooting, and reading wind.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#eef0ee",
+  "theme_color": "#15171a",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

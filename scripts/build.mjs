@@ -4,13 +4,14 @@
 // wraps them in src/partials/layout.html, writes plain static files to public/.
 // Vercel then serves public/ as-is: no build step required at deploy time.
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, cpSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const PAGES_DIR = join(ROOT, "src/pages");
 const LAYOUT_PATH = join(ROOT, "src/partials/layout.html");
+const STATIC_DIR = join(ROOT, "static");
 const OUT_DIR = join(ROOT, "public");
 
 const NAV = [
@@ -136,6 +137,10 @@ self.addEventListener("fetch", (event) => {
 }
 
 function build() {
+  mkdirSync(OUT_DIR, { recursive: true });
+  cpSync(STATIC_DIR, OUT_DIR, { recursive: true });
+  console.log(`copied static/                     -> public/  (css, js, icons, manifest.json, print)`);
+
   const layout = readFileSync(LAYOUT_PATH, "utf8");
   const files = readdirSync(PAGES_DIR).filter((f) => f.endsWith(".html"));
 

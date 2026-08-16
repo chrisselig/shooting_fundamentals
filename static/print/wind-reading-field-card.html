@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wind Reading — Field Card</title>
+<style>
+  :root{
+    --ink:#15171a;
+    --muted:#5c6268;
+    --rule:#c9ced3;
+    --hair:#e4e7ea;
+    --accent:#2e4a5b;
+    --paper:#ffffff;
+    --display:"Arial Narrow","Helvetica Neue Condensed","Liberation Sans Narrow",Arial,sans-serif;
+    --body:"Helvetica Neue",Arial,Helvetica,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background:#e8e9e6;
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:10.5pt;
+    line-height:1.4;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .sheet{
+    background:var(--paper);
+    width:8.5in;
+    min-height:11in;
+    margin:24px auto;
+    padding:0.5in 0.55in 0.45in;
+    box-shadow:0 2px 18px rgba(0,0,0,.18);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    border-bottom:2.5pt solid var(--ink);
+    padding-bottom:6px;
+  }
+  .kicker{
+    font-family:var(--mono);
+    font-size:7.5pt;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:29pt;
+    line-height:.95;
+    letter-spacing:-.005em;
+    text-transform:uppercase;
+    margin:4px 0 6px;
+  }
+  .deck{
+    font-size:9.5pt;
+    color:var(--muted);
+    max-width:5.6in;
+  }
+
+  /* ---------- sections ---------- */
+  .section{
+    margin-top:14px;
+    page-break-inside:avoid;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    border-bottom:1pt solid var(--rule);
+    padding-bottom:4px;
+  }
+  .num{
+    font-family:var(--mono);
+    font-size:8pt;
+    font-weight:700;
+    letter-spacing:.1em;
+    color:var(--accent);
+    border:1pt solid var(--accent);
+    padding:1px 5px 0;
+  }
+  h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:16.5pt;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    margin:0;
+    flex:1;
+  }
+  .head-note{
+    font-family:var(--mono);
+    font-size:7.5pt;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .lede{
+    margin:7px 0 0;
+    font-size:10pt;
+  }
+
+  /* ---------- mirage table ---------- */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+  }
+  td{
+    border-bottom:.6pt solid var(--hair);
+    padding:6px 0;
+    vertical-align:middle;
+  }
+  tr:last-child td{border-bottom:none;}
+
+  .c-glyph{width:74px;padding-right:8px;}
+  .c-speed{width:104px;padding-right:12px;}
+  .c-label{width:132px;padding-right:12px;}
+
+  .speed{
+    font-family:var(--mono);
+    font-size:13pt;
+    font-weight:700;
+    letter-spacing:-.01em;
+    display:block;
+  }
+  .speed small{
+    display:block;
+    font-size:7pt;
+    font-weight:400;
+    letter-spacing:.14em;
+    color:var(--muted);
+    margin-top:2px;
+  }
+  .label{
+    font-family:var(--display);
+    font-size:12.5pt;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+  .angle{
+    font-family:var(--mono);
+    font-size:7.5pt;
+    color:var(--accent);
+    letter-spacing:.06em;
+    margin-top:1px;
+  }
+  .desc{font-size:9.5pt;}
+
+  svg{display:block;}
+  .wave{
+    fill:none;
+    stroke:var(--accent);
+    stroke-width:2.4;
+    stroke-linecap:round;
+  }
+
+  /* ---------- caution bar ---------- */
+  .caution{
+    margin-top:10px;
+    border-left:3pt solid var(--ink);
+    background:#f2f3f4;
+    padding:7px 11px;
+    font-size:9.5pt;
+  }
+  .caution b{
+    font-family:var(--display);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    font-size:10.5pt;
+  }
+
+  /* ---------- bracket steps ---------- */
+  ol.steps{
+    margin:8px 0 0;
+    padding:0;
+    list-style:none;
+    counter-reset:step;
+  }
+  ol.steps li{
+    counter-increment:step;
+    position:relative;
+    padding:0 0 5px 26px;
+    font-size:10pt;
+  }
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute;
+    left:0;
+    top:1px;
+    font-family:var(--mono);
+    font-size:8pt;
+    font-weight:700;
+    color:var(--accent);
+  }
+  a{color:var(--ink);text-decoration:none;border-bottom:.6pt solid var(--accent);}
+
+  /* ---------- fill-in box ---------- */
+  .bracket-box{
+    margin-top:10px;
+    border:1.2pt solid var(--ink);
+    padding:9px 12px 10px;
+  }
+  .bracket-box .bb-title{
+    font-family:var(--mono);
+    font-size:7.5pt;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:7px;
+  }
+  .bb-grid{display:table;width:100%;table-layout:fixed;}
+  .bb-cell{display:table-cell;width:50%;padding-right:26px;}
+  .bb-tag{
+    font-family:var(--display);
+    font-size:13pt;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+  .bb-line{
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    margin-top:5px;
+    font-family:var(--mono);
+    font-size:8pt;
+    letter-spacing:.08em;
+    color:var(--muted);
+  }
+  .rule-fill{
+    flex:1;
+    border-bottom:.8pt solid var(--ink);
+    height:16px;
+  }
+  .callout{
+    margin-top:9px;
+    font-family:var(--display);
+    font-size:13pt;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+    text-align:center;
+    border-top:.6pt solid var(--hair);
+    padding-top:7px;
+  }
+
+  footer{
+    margin-top:14px;
+    border-top:2.5pt solid var(--ink);
+    padding-top:6px;
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:7.5pt;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ---------- print ---------- */
+  @page{size:letter portrait;margin:0.45in;}
+  @media print{
+    body{background:#fff;font-size:10pt;}
+    .sheet{
+      width:auto;min-height:0;margin:0;padding:0;
+      box-shadow:none;
+      zoom:0.90;               /* holds the four sections on a single sheet */
+    }
+    .caution{background:transparent;border-left-width:3pt;}
+    a[href]::after{
+      content:" (" attr(href) ")";
+      font-family:var(--mono);
+      font-size:7pt;
+      color:var(--muted);
+      border:none;
+    }
+    a{border-bottom:none;}
+  }
+
+  @media screen and (max-width:900px){
+    .sheet{width:auto;margin:0;padding:20px 16px;min-height:0;}
+    h1{font-size:26pt;}
+    .c-glyph{width:56px;}
+    .c-speed{width:82px;}
+    .c-label{width:100px;}
+    .bb-grid{display:block;}
+    .bb-cell{display:block;width:auto;padding:0 0 14px;}
+  }
+  @media screen{
+    .back-link{
+      display:block;
+      max-width:8.5in;
+      margin:16px auto 0;
+      font-family:var(--mono);
+      font-size:9pt;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--ink);
+    }
+  }
+  @media print{ .back-link{display:none;} }
+</style>
+</head>
+<body>
+<a class="back-link" href="/reading-conditions/">&larr; Back to Shooting Fundamentals</a>
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="kicker">Range Reference · Carry Card</div>
+    <h1>Reading Wind<br>Without a Meter</h1>
+    <p class="deck">Mirage, environment, and bracketing — three reads that get you to a hold before the timer starts.</p>
+  </header>
+
+  <!-- 01 ------------------------------------------------------------- -->
+  <section class="section">
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>The Mirage Visual Scale</h2>
+      <span class="head-note">Optic</span>
+    </div>
+    <p class="lede">Look through your rifle scope or spotting scope and intentionally focus slightly short of the target to see the heat waves in the air.</p>
+
+    <table>
+      <tr>
+        <td class="c-glyph">
+          <svg viewBox="0 0 56 48" width="56" height="48" aria-hidden="true">
+            <g transform="rotate(0 28 24)">
+              <path class="wave" d="M14,44 C7,36 21,28 14,20 C7,12 21,8 14,4"/>
+              <path class="wave" d="M28,44 C21,36 35,28 28,20 C21,12 35,8 28,4"/>
+              <path class="wave" d="M42,44 C35,36 49,28 42,20 C35,12 49,8 42,4"/>
+            </g>
+          </svg>
+        </td>
+        <td class="c-speed"><span class="speed">0<small>MPH</small></span></td>
+        <td class="c-label"><div class="label">Boil</div><div class="angle">90° vertical</div></td>
+        <td class="desc">Waves rise straight up like steam. No horizontal wind component.</td>
+      </tr>
+      <tr>
+        <td class="c-glyph">
+          <svg viewBox="0 0 56 48" width="56" height="48" aria-hidden="true">
+            <g transform="rotate(30 28 24)">
+              <path class="wave" d="M14,44 C7,36 21,28 14,20 C7,12 21,8 14,4"/>
+              <path class="wave" d="M28,44 C21,36 35,28 28,20 C21,12 35,8 28,4"/>
+              <path class="wave" d="M42,44 C35,36 49,28 42,20 C35,12 49,8 42,4"/>
+            </g>
+          </svg>
+        </td>
+        <td class="c-speed"><span class="speed">1–3<small>MPH</small></span></td>
+        <td class="c-label"><div class="label">Slow Drift</div><div class="angle">60° tilt</div></td>
+        <td class="desc">Waves tilt diagonally at roughly a 60-degree angle.</td>
+      </tr>
+      <tr>
+        <td class="c-glyph">
+          <svg viewBox="0 0 56 48" width="56" height="48" aria-hidden="true">
+            <g transform="rotate(60 28 24)">
+              <path class="wave" d="M14,44 C7,36 21,28 14,20 C7,12 21,8 14,4"/>
+              <path class="wave" d="M28,44 C21,36 35,28 28,20 C21,12 35,8 28,4"/>
+              <path class="wave" d="M42,44 C35,36 49,28 42,20 C35,12 49,8 42,4"/>
+            </g>
+          </svg>
+        </td>
+        <td class="c-speed"><span class="speed">4–7<small>MPH</small></span></td>
+        <td class="c-label"><div class="label">Medium Cross</div><div class="angle">30° tilt</div></td>
+        <td class="desc">Waves tilt hard, running across the target frame at roughly a 30-degree angle.</td>
+      </tr>
+      <tr>
+        <td class="c-glyph">
+          <svg viewBox="0 0 56 48" width="56" height="48" aria-hidden="true">
+            <g transform="rotate(90 28 24)">
+              <path class="wave" d="M14,44 C7,36 21,28 14,20 C7,12 21,8 14,4"/>
+              <path class="wave" d="M28,44 C21,36 35,28 28,20 C21,12 35,8 28,4"/>
+              <path class="wave" d="M42,44 C35,36 49,28 42,20 C35,12 49,8 42,4"/>
+            </g>
+          </svg>
+        </td>
+        <td class="c-speed"><span class="speed">8+<small>MPH</small></span></td>
+        <td class="c-label"><div class="label">Fast Wind</div><div class="angle">0° flat</div></td>
+        <td class="desc">The mirage floats completely flat horizontally.</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <b>Flat is the ceiling.</b> Once mirage goes flat it cannot tell you the difference between 8 mph and 15 mph — switch to grass or flags at this point.
+    </div>
+  </section>
+
+  <!-- 02 ------------------------------------------------------------- -->
+  <section class="section">
+    <div class="section-head">
+      <span class="num">02</span>
+      <h2>The Mirage Zoom Sweet Spot</h2>
+      <span class="head-note">Glass Setup</span>
+    </div>
+
+    <table>
+      <tr>
+        <td class="c-speed"><span class="speed">12–18<small>MAGNIFICATION</small></span></td>
+        <td class="desc"><b>Stay in this band.</b> It's the ideal range for seeing the wavy lines of mirage clearly at 100 to 200 yards while keeping enough field of view to transition between targets on a stage.</td>
+      </tr>
+      <tr>
+        <td class="c-speed"><span class="speed">−20%<small>PARALLAX</small></span></td>
+        <td class="desc"><b>De-focus slightly.</b> Turn your side focus knob slightly off-target — for a 100-yard target, dial to roughly 75 or 80 yards. The target goes slightly soft, but the air currents right in front of it pop out vividly.</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 03 ------------------------------------------------------------- -->
+  <section class="section">
+    <div class="section-head">
+      <span class="num">03</span>
+      <h2>The Environment as a Speed Gauge</h2>
+      <span class="head-note">Naked Eye</span>
+    </div>
+    <p class="lede">If the match director hasn't placed wind flags along the range, use these natural baselines to estimate speed.</p>
+
+    <table>
+      <tr>
+        <td class="c-speed"><span class="speed">2–3<small>MPH</small></span></td>
+        <td class="desc">Wind is faintly felt on your face; leaves on trees may twitch slightly.</td>
+      </tr>
+      <tr>
+        <td class="c-speed"><span class="speed">4–6<small>MPH</small></span></td>
+        <td class="desc">Small twigs and light grass move continuously. Match flags stand out at roughly a 45-degree angle.</td>
+      </tr>
+      <tr>
+        <td class="c-speed"><span class="speed">8–12<small>MPH</small></span></td>
+        <td class="desc">Whole branches of bushes shake, loose dust and paper lift off the ground, and flags blow straight out horizontally.</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 04 ------------------------------------------------------------- -->
+  <section class="section">
+    <div class="section-head">
+      <span class="num">04</span>
+      <h2>Build a Wind Bracket Before Your Stage</h2>
+      <span class="head-note">Squad Line</span>
+    </div>
+    <p class="lede">Never try to guess the exact mile-per-hour number while your match timer is ticking. Establish a bracket while waiting in the squad line.</p>
+
+    <ol class="steps">
+      <li>Observe the flags for 2 minutes before your turn.</li>
+      <li>Identify the <b>lull</b> — the lowest the wind drops, e.g. 4 mph — and the <b>gust</b> — the highest it kicks up, e.g. 10 mph.</li>
+      <li>Find your holds for those two exact speeds on your <a href="https://www.cole-tac.com/product/cheat-sheet/">Cole-TAC Cheat Sheet</a> card.</li>
+      <li>Write both holds down before you build your position.</li>
+    </ol>
+
+    <div class="bracket-box">
+      <div class="bb-title">Stage Bracket — fill in on the line</div>
+      <div class="bb-grid">
+        <div class="bb-cell">
+          <div class="bb-tag">Lull</div>
+          <div class="bb-line"><span class="rule-fill"></span>MPH</div>
+          <div class="bb-line"><span class="rule-fill"></span>HOLD</div>
+        </div>
+        <div class="bb-cell">
+          <div class="bb-tag">Gust</div>
+          <div class="bb-line"><span class="rule-fill"></span>MPH</div>
+          <div class="bb-line"><span class="rule-fill"></span>HOLD</div>
+        </div>
+      </div>
+      <div class="callout">On the clock, one decision:<br>lull hold or gust hold?</div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Wind Reading Field Card</span>
+    <span>Range / Date ________________</span>
+  </footer>
+
+</div>
+</body>
+</html>
