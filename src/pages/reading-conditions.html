@@ -166,6 +166,107 @@ nav: reading-conditions
 
   <h3 style="margin-top:20px;font-size:15px;">The Wind Clock</h3>
   <p>Picture a clock face laid flat over the range, 12 pointing downrange at the target and 6 back at you. Where the wind is blowing <i>from</i> on that clock sets how much of it actually pushes your bullet sideways:</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 300 325" width="260" height="282" role="img" aria-labelledby="windClockTitle">
+      <title id="windClockTitle">Wind clock dial showing no, half, and full value positions</title>
+
+      <circle cx="150" cy="150" r="115" fill="#fafbfb" stroke="#15171a" stroke-width="2"/>
+
+      <!-- hour ticks -->
+      <g stroke="#c9ced3" stroke-width="1.5">
+        <line x1="150" y1="35" x2="150" y2="47"/>
+        <line x1="207.5" y1="50.4" x2="197.5" y2="58"/>
+        <line x1="249.6" y1="92.5" x2="239.4" y2="98"/>
+        <line x1="265" y1="150" x2="253" y2="150"/>
+        <line x1="249.6" y1="207.5" x2="239.4" y2="202"/>
+        <line x1="207.5" y1="249.6" x2="197.5" y2="242"/>
+        <line x1="150" y1="265" x2="150" y2="253"/>
+        <line x1="92.5" y1="249.6" x2="102.5" y2="242"/>
+        <line x1="50.4" y1="207.5" x2="60.6" y2="202"/>
+        <line x1="35" y1="150" x2="47" y2="150"/>
+        <line x1="50.4" y1="92.5" x2="60.6" y2="98"/>
+        <line x1="92.5" y1="50.4" x2="102.5" y2="58"/>
+      </g>
+
+      <!-- hour numbers -->
+      <g font-family="ui-monospace,monospace" font-size="11" fill="#5c6268" text-anchor="middle">
+        <text x="150" y="23">12</text>
+        <text x="220" y="40">1</text>
+        <text x="266" y="88">2</text>
+        <text x="281" y="155">3</text>
+        <text x="266" y="221">4</text>
+        <text x="220" y="268">5</text>
+        <text x="150" y="285">6</text>
+        <text x="80" y="268">7</text>
+        <text x="34" y="221">8</text>
+        <text x="19" y="155">9</text>
+        <text x="34" y="88">10</text>
+        <text x="80" y="40">11</text>
+      </g>
+
+      <!-- optional ¾-value diagonals (1:30 / 4:30 / 7:30 / 10:30) -->
+      <g stroke="#9fb4c0" stroke-width="1.4" stroke-dasharray="3 3">
+        <line x1="150" y1="150" x2="195" y2="105"/>
+        <line x1="150" y1="150" x2="195" y2="195"/>
+        <line x1="150" y1="150" x2="105" y2="195"/>
+        <line x1="150" y1="150" x2="105" y2="105"/>
+      </g>
+      <g font-family="ui-monospace,monospace" font-size="8" fill="#7a94a1" text-anchor="middle">
+        <text x="202" y="100">&frac34;</text>
+        <text x="202" y="203">&frac34;</text>
+        <text x="98" y="203">&frac34;</text>
+        <text x="98" y="100">&frac34;</text>
+      </g>
+
+      <!-- half-value spokes: 1, 5, 7, 11 -->
+      <g stroke="#5c81a0" stroke-width="2.4" stroke-linecap="round">
+        <line x1="150" y1="150" x2="195" y2="72.1"/>
+        <line x1="150" y1="150" x2="195" y2="227.9"/>
+        <line x1="150" y1="150" x2="105" y2="227.9"/>
+        <line x1="150" y1="150" x2="105" y2="72.1"/>
+      </g>
+      <g font-family="ui-monospace,monospace" font-weight="700" font-size="11" fill="#5c81a0" text-anchor="middle">
+        <text x="207" y="65">&frac12;</text>
+        <text x="207" y="240">&frac12;</text>
+        <text x="93" y="240">&frac12;</text>
+        <text x="93" y="65">&frac12;</text>
+      </g>
+
+      <!-- full-value spokes: 3, 9 -->
+      <g stroke="#2e4a5b" stroke-width="4" stroke-linecap="round">
+        <line x1="150" y1="150" x2="240" y2="150"/>
+        <line x1="150" y1="150" x2="60" y2="150"/>
+      </g>
+      <g font-family="ui-monospace,monospace" font-weight="700" font-size="13" fill="#2e4a5b" text-anchor="middle">
+        <text x="247" y="138">1.0</text>
+        <text x="53" y="138">1.0</text>
+      </g>
+
+      <!-- no-value axis: 12, 6 -->
+      <g stroke="#9aa0a6" stroke-width="2" stroke-linecap="round">
+        <line x1="150" y1="150" x2="150" y2="60"/>
+        <line x1="150" y1="150" x2="150" y2="240"/>
+      </g>
+      <g font-family="ui-monospace,monospace" font-weight="700" font-size="10" fill="#5c6268" text-anchor="middle">
+        <text x="168" y="92">0</text>
+        <text x="168" y="218">0</text>
+      </g>
+
+      <!-- target glyph at 12, shooter glyph at 6 -->
+      <g transform="translate(150,14)">
+        <circle r="9" fill="none" stroke="#15171a" stroke-width="1.4"/>
+        <circle r="4.5" fill="none" stroke="#15171a" stroke-width="1.2"/>
+        <circle r="1.4" fill="#15171a"/>
+      </g>
+      <text x="150" y="7" text-anchor="middle" font-family="ui-monospace,monospace" font-size="7" letter-spacing=".06em" fill="#5c6268">TARGET</text>
+
+      <circle cx="150" cy="297" r="7" fill="#15171a"/>
+      <text x="150" y="312" text-anchor="middle" font-family="ui-monospace,monospace" font-size="7" letter-spacing=".06em" fill="#5c6268">YOU</text>
+    </svg>
+    <figcaption>Where the wind comes <em>from</em>, read on the dial &mdash; bold full value at 3/9, mid half value at 1/5/7/11, none at 12/6. Dashed &frac34; diagonals are the optional fourth step.</figcaption>
+  </div>
+
   <table>
     <thead>
       <tr><th>Clock position</th><th>Value</th><th>Multiplier</th></tr>
@@ -272,7 +373,7 @@ nav: reading-conditions
   </div>
 
   <div class="fps-calc" id="fpsCalc">
-    <div class="fps-calc-title">FPS Adjustment Calculator</div>
+    <div class="fps-calc-title">Wind Hold Calculator</div>
     <div class="fps-calc-grid">
       <label>Your gun number
         <input type="number" id="fpsGunNumber" value="8.3" step="0.1">
@@ -284,8 +385,39 @@ nav: reading-conditions
         <input type="number" id="fpsActual" placeholder="e.g. 1010" step="1">
       </label>
     </div>
+    <div class="fps-calc-grid" style="margin-top:12px;">
+      <label>Wind <small>(mph)</small>
+        <input type="number" id="fpsWind" placeholder="e.g. 10" step="1">
+      </label>
+      <label>Clock value
+        <select id="fpsValue">
+          <option value="1">3/9 o'clock &mdash; full (&times;1.0)</option>
+          <option value="0.75">1:30/4:30/7:30/10:30 &mdash; &frac34; (&times;0.75)</option>
+          <option value="0.5">1/5/7/11 o'clock &mdash; half (&times;0.5)</option>
+          <option value="0">12/6 o'clock &mdash; none (&times;0)</option>
+        </select>
+      </label>
+    </div>
     <div class="fps-calc-result">
       Adjusted gun number: <span id="fpsResult">&mdash;</span>
+    </div>
+
+    <div class="fps-hold-table">
+      <div class="fps-calc-title" style="margin-top:4px;">Hold Table</div>
+      <div class="fps-unit-toggle" role="group" aria-label="Distance unit">
+        <button type="button" id="fpsUnitYd" class="unit-btn active" data-unit="yd">Yards</button>
+        <button type="button" id="fpsUnitM" class="unit-btn" data-unit="m">Meters</button>
+      </div>
+      <label class="fps-custom-label">Custom distance <small id="fpsCustomUnitLabel">(yd)</small>
+        <input type="number" id="fpsCustomDistance" placeholder="e.g. 212" step="1">
+      </label>
+      <div class="fps-hold-table-wrap">
+        <table id="fpsHoldTable">
+          <thead><tr><th>Range</th><th>Hold</th></tr></thead>
+          <tbody id="fpsHoldTableBody"></tbody>
+        </table>
+      </div>
+      <p class="fps-metric-note" id="fpsMetricNote" hidden>Meters are converted into yards before the formula runs &mdash; this gun number was trued in yards. True a separate metric reference if you shoot metric matches primarily.</p>
     </div>
   </div>
   <style>
@@ -294,32 +426,101 @@ nav: reading-conditions
     .fps-calc-grid{display:flex;flex-wrap:wrap;gap:14px;}
     .fps-calc-grid label{flex:1 1 140px;display:flex;flex-direction:column;gap:5px;font-family:var(--mono);font-size:8pt;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
     .fps-calc-grid label small{text-transform:none;letter-spacing:0;font-family:var(--body);}
-    .fps-calc-grid input{font-family:var(--mono);font-size:13pt;color:var(--ink);border:none;border-bottom:1.2px solid var(--rule);padding:4px 2px;background:transparent;}
-    .fps-calc-grid input:focus{outline:none;border-bottom-color:var(--accent);}
-    .fps-calc-result{margin-top:14px;padding-top:10px;border-top:1px solid var(--hair);font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:15px;}
+    .fps-calc-grid input,.fps-calc-grid select{font-family:var(--mono);font-size:13pt;color:var(--ink);border:none;border-bottom:1.2px solid var(--rule);padding:4px 2px;background:transparent;}
+    .fps-calc-grid select{font-size:9pt;padding:6px 2px;}
+    .fps-calc-grid input:focus,.fps-calc-grid select:focus{outline:none;border-bottom-color:var(--accent);}
+    .fps-calc-result{margin-top:14px;padding-top:10px;border-top:1px solid var(--hair);font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:15px;line-height:1.9;}
     .fps-calc-result span{font-family:var(--mono);color:var(--accent);}
+    .fps-hold-table{margin-top:14px;padding-top:12px;border-top:1px solid var(--hair);}
+    .fps-unit-toggle{display:flex;gap:8px;margin-bottom:10px;}
+    .unit-btn{font-family:var(--mono);font-size:8pt;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:transparent;border:1.2px solid var(--rule);padding:5px 12px;cursor:pointer;}
+    .unit-btn.active{color:#fff;background:var(--accent);border-color:var(--accent);}
+    .fps-custom-label{display:flex;flex-direction:column;gap:5px;font-family:var(--mono);font-size:8pt;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);max-width:180px;margin-bottom:10px;}
+    .fps-custom-label small{text-transform:none;letter-spacing:0;font-family:var(--body);}
+    .fps-custom-label input{font-family:var(--mono);font-size:13pt;color:var(--ink);border:none;border-bottom:1.2px solid var(--rule);padding:4px 2px;background:transparent;}
+    .fps-custom-label input:focus{outline:none;border-bottom-color:var(--accent);}
+    .fps-hold-table-wrap{max-height:280px;overflow-y:auto;border:1px solid var(--hair);}
+    .fps-hold-table-wrap table{width:100%;border-collapse:collapse;margin:0;}
+    .fps-hold-table-wrap th{position:sticky;top:0;background:#fafbfb;text-align:left;font-family:var(--mono);font-size:7.5pt;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 10px;border-bottom:1pt solid var(--rule);}
+    .fps-hold-table-wrap td{padding:5px 10px;border-bottom:.6pt solid var(--hair);font-size:9.5pt;}
+    .fps-hold-table-wrap tr.custom-row td{font-weight:700;background:#f2f3f4;}
+    .fps-metric-note{margin-top:10px;font-size:8.5pt;color:var(--muted);}
   </style>
   <script>
     (function () {
       var gunEl = document.getElementById("fpsGunNumber");
       var refEl = document.getElementById("fpsReference");
       var actEl = document.getElementById("fpsActual");
+      var windEl = document.getElementById("fpsWind");
+      var valueEl = document.getElementById("fpsValue");
       var outEl = document.getElementById("fpsResult");
-      if (!gunEl || !refEl || !actEl || !outEl) return;
-      function recalc() {
+      var unitYdBtn = document.getElementById("fpsUnitYd");
+      var unitMBtn = document.getElementById("fpsUnitM");
+      var customEl = document.getElementById("fpsCustomDistance");
+      var customUnitLabel = document.getElementById("fpsCustomUnitLabel");
+      var tableBody = document.getElementById("fpsHoldTableBody");
+      var metricNote = document.getElementById("fpsMetricNote");
+      if (!gunEl || !refEl || !actEl || !outEl || !tableBody) return;
+
+      var unit = "yd";
+      var YD_PER_M = 1 / 0.9144;
+
+      function adjustedGunNumber() {
         var gun = parseFloat(gunEl.value);
         var ref = parseFloat(refEl.value);
         var act = parseFloat(actEl.value);
-        if (!gun || !ref || !act) {
-          outEl.textContent = "—";
-          return;
-        }
-        outEl.textContent = (gun * (act / ref)).toFixed(1);
+        if (!gun || !ref || !act) return null;
+        return gun * (act / ref);
       }
-      [gunEl, refEl, actEl].forEach(function (el) {
-        el.addEventListener("input", recalc);
+
+      function holdFor(distance, unitLabel, adjustedGun, wind, value) {
+        var distanceYd = unitLabel === "m" ? distance * YD_PER_M : distance;
+        return (distanceYd / 100) * wind * value / adjustedGun;
+      }
+
+      function renderTable() {
+        var adjustedGun = adjustedGunNumber();
+        outEl.textContent = adjustedGun ? adjustedGun.toFixed(1) : "—";
+
+        tableBody.innerHTML = "";
+        var wind = parseFloat(windEl.value);
+        var value = parseFloat(valueEl.value);
+        if (!adjustedGun || (!wind && wind !== 0) || isNaN(value)) return;
+
+        var custom = parseFloat(customEl.value);
+        if (custom) {
+          var customHold = holdFor(custom, unit, adjustedGun, wind, value);
+          var row = document.createElement("tr");
+          row.className = "custom-row";
+          row.innerHTML = "<td>" + custom + " " + unit + " (custom)</td><td>" + customHold.toFixed(2) + " MIL</td>";
+          tableBody.appendChild(row);
+        }
+
+        for (var d = 10; d <= 400; d += 10) {
+          var hold = holdFor(d, unit, adjustedGun, wind, value);
+          var tr = document.createElement("tr");
+          tr.innerHTML = "<td>" + d + " " + unit + "</td><td>" + hold.toFixed(2) + " MIL</td>";
+          tableBody.appendChild(tr);
+        }
+      }
+
+      function setUnit(next) {
+        unit = next;
+        unitYdBtn.classList.toggle("active", unit === "yd");
+        unitMBtn.classList.toggle("active", unit === "m");
+        customUnitLabel.textContent = "(" + unit + ")";
+        metricNote.hidden = unit !== "m";
+        renderTable();
+      }
+
+      unitYdBtn.addEventListener("click", function () { setUnit("yd"); });
+      unitMBtn.addEventListener("click", function () { setUnit("m"); });
+
+      [gunEl, refEl, actEl, windEl, valueEl, customEl].forEach(function (el) {
+        el.addEventListener("input", renderTable);
+        el.addEventListener("change", renderTable);
       });
-      recalc();
+      renderTable();
     })();
   </script>
 
