@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gun Number — Pocket Card</title>
+<style>
+  :root{
+    --ink:#15171a;
+    --muted:#5c6268;
+    --rule:#c9ced3;
+    --hair:#e4e7ea;
+    --accent:#2e4a5b;
+    --paper:#ffffff;
+    --display:"Arial Narrow","Helvetica Neue Condensed","Liberation Sans Narrow",Arial,sans-serif;
+    --body:"Helvetica Neue",Arial,Helvetica,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background:#e8e9e6;
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:10.5pt;
+    line-height:1.4;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .sheet{
+    background:var(--paper);
+    width:8.5in;
+    min-height:11in;
+    margin:24px auto;
+    padding:0.5in 0.55in 0.45in;
+    box-shadow:0 2px 18px rgba(0,0,0,.18);
+  }
+
+  .masthead{
+    border-bottom:2.5pt solid var(--ink);
+    padding-bottom:6px;
+  }
+  .kicker{
+    font-family:var(--mono);
+    font-size:7.5pt;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:29pt;
+    line-height:.95;
+    letter-spacing:-.005em;
+    text-transform:uppercase;
+    margin:4px 0 6px;
+  }
+  .deck{
+    font-size:9.5pt;
+    color:var(--muted);
+    max-width:5.6in;
+  }
+
+  .section{
+    margin-top:16px;
+    page-break-inside:avoid;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    border-bottom:1pt solid var(--rule);
+    padding-bottom:4px;
+  }
+  .num{
+    font-family:var(--mono);
+    font-size:8pt;
+    font-weight:700;
+    letter-spacing:.1em;
+    color:var(--accent);
+    border:1pt solid var(--accent);
+    padding:1px 5px 0;
+  }
+  h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:16.5pt;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    margin:0;
+    flex:1;
+  }
+  .head-note{
+    font-family:var(--mono);
+    font-size:7.5pt;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .lede{
+    margin:7px 0 0;
+    font-size:10pt;
+  }
+
+  /* ---------- formula block ---------- */
+  .formula{
+    margin-top:12px;
+    border:1.2pt solid var(--ink);
+    padding:12px 14px;
+    text-align:center;
+    font-family:var(--mono);
+    font-size:13pt;
+    font-weight:700;
+    letter-spacing:-.01em;
+  }
+  .formula small{
+    display:block;
+    margin-top:4px;
+    font-family:var(--body);
+    font-weight:400;
+    font-size:8pt;
+    letter-spacing:0;
+    text-transform:none;
+    color:var(--muted);
+  }
+
+  ol.steps{
+    margin:10px 0 0;
+    padding:0;
+    list-style:none;
+    counter-reset:step;
+  }
+  ol.steps li{
+    counter-increment:step;
+    position:relative;
+    padding:0 0 6px 26px;
+    font-size:9.5pt;
+  }
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute;
+    left:0;
+    top:1px;
+    font-family:var(--mono);
+    font-size:8pt;
+    font-weight:700;
+    color:var(--accent);
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+  }
+  th{
+    text-align:left;
+    font-family:var(--mono);
+    font-size:7.5pt;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    padding:0 0 4px;
+    border-bottom:1pt solid var(--rule);
+  }
+  td{
+    border-bottom:.6pt solid var(--hair);
+    padding:5px 0;
+    vertical-align:middle;
+    font-size:9.5pt;
+  }
+  tr:last-child td{border-bottom:none;}
+
+  .caution{
+    margin-top:10px;
+    border-left:3pt solid var(--ink);
+    background:#f2f3f4;
+    padding:7px 11px;
+    font-size:9.5pt;
+  }
+  .caution b{
+    font-family:var(--display);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    font-size:10.5pt;
+  }
+
+  /* ---------- fill-in box ---------- */
+  .bracket-box{
+    margin-top:12px;
+    border:1.2pt solid var(--ink);
+    padding:9px 12px 10px;
+  }
+  .bb-title{
+    font-family:var(--mono);
+    font-size:7.5pt;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:7px;
+  }
+  .bb-grid{display:table;width:100%;table-layout:fixed;}
+  .bb-cell{display:table-cell;width:25%;padding-right:14px;}
+  .bb-tag{
+    font-family:var(--display);
+    font-size:11pt;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .bb-line{
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    margin-top:5px;
+    font-family:var(--mono);
+    font-size:8pt;
+    letter-spacing:.08em;
+    color:var(--muted);
+  }
+  .rule-fill{
+    flex:1;
+    border-bottom:.8pt solid var(--ink);
+    height:16px;
+  }
+  .callout{
+    margin-top:10px;
+    font-family:var(--display);
+    font-size:13pt;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+    text-align:center;
+    border-top:.6pt solid var(--hair);
+    padding-top:7px;
+  }
+
+  footer{
+    margin-top:16px;
+    border-top:2.5pt solid var(--ink);
+    padding-top:6px;
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:7.5pt;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  @page{size:letter portrait;margin:0.45in;}
+  @media print{
+    body{background:#fff;font-size:10pt;}
+    .sheet{
+      width:auto;min-height:0;margin:0;padding:0;
+      box-shadow:none;
+    }
+    .caution{background:transparent;border-left-width:3pt;}
+    a[href]::after{
+      content:" (" attr(href) ")";
+      font-family:var(--mono);
+      font-size:7pt;
+      color:var(--muted);
+      border:none;
+    }
+    a{border-bottom:none;}
+  }
+
+  @media screen and (max-width:900px){
+    .sheet{width:auto;margin:0;padding:20px 16px;min-height:0;}
+    h1{font-size:26pt;}
+    .bb-grid{display:block;}
+    .bb-cell{display:block;width:auto;padding:0 0 14px;}
+  }
+  @media screen{
+    .back-link{
+      display:block;
+      max-width:8.5in;
+      margin:16px auto 0;
+      font-family:var(--mono);
+      font-size:9pt;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--ink);
+    }
+  }
+  @media print{ .back-link{display:none;} }
+
+  a{color:var(--ink);text-decoration:none;border-bottom:.6pt solid var(--accent);}
+</style>
+</head>
+<body>
+<a class="back-link" href="/reading-conditions/#gun-number">&larr; Back to Shooting Fundamentals</a>
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="kicker">Range Reference · Pocket Card</div>
+    <h1>Your Gun Number</h1>
+    <p class="deck">A single personal constant for a mental-math wind hold &mdash; built from your own trued dope, not a borrowed rimfire formula.</p>
+  </header>
+
+  <!-- 01 ------------------------------------------------------------- -->
+  <section class="section">
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>The Formula</h2>
+      <span class="head-note">Both Directions</span>
+    </div>
+
+    <div class="formula">
+      Gun Number = (Range ÷ 100) × Wind(mph) × Value ÷ Hold(MIL)
+      <small>Range in yards. Value: 1.0 full (3/9 o'clock), 0.5 half (1/5/7/11), 0 none (12/6).</small>
+    </div>
+    <div class="formula" style="margin-top:8px;">
+      Hold(MIL) = (Range ÷ 100) × Wind(mph) × Value ÷ Gun Number
+      <small>Same formula, solved for the hold once you know your gun number.</small>
+    </div>
+  </section>
+
+  <!-- 02 ------------------------------------------------------------- -->
+  <section class="section">
+    <div class="section-head">
+      <span class="num">02</span>
+      <h2>Deriving Yours</h2>
+      <span class="head-note">At Home, Once</span>
+    </div>
+    <ol class="steps">
+      <li>Get one <b>trued, full-value, known-speed</b> wind hold at the distance you shoot most (100 yd is typical for NRL22).</li>
+      <li>Plug range, wind speed, value, and that trued hold into the Gun Number formula above.</li>
+      <li>Round to one decimal. Write it in the box below.</li>
+      <li>Check it against a second trued distance &mdash; if it's off by more than a click or two there, true that distance on its own rather than trusting one constant past 150&ndash;200 yd.</li>
+    </ol>
+  </section>
+
+  <!-- 03 ------------------------------------------------------------- -->
+  <section class="section">
+    <div class="section-head">
+      <span class="num">03</span>
+      <h2>Worked Example</h2>
+      <span class="head-note">10 mph · Full Value</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Range</th><th>Trued hold</th><th>Gun # 8.3 predicts</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>50 yd</td><td>0.7 MIL</td><td>0.6 MIL</td></tr>
+        <tr><td>75 yd</td><td>0.9 MIL</td><td>0.9 MIL</td></tr>
+        <tr><td>100 yd</td><td>1.2 MIL</td><td>1.2 MIL (reference)</td></tr>
+        <tr><td>150 yd</td><td>1.7 MIL</td><td>1.8 MIL</td></tr>
+        <tr><td>200 yd</td><td>2.2 MIL</td><td>2.4 MIL</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="caution">
+    <b>Yours, not universal</b>
+    This constant comes from one load, one zero, one elevation — yours. It drifts a couple tenths of a MIL by 200 yd and isn't valid for someone else's rifle or a different bullet/velocity. Re-true past 200 yd rather than trusting the constant.
+  </div>
+
+  <!-- 04 ------------------------------------------------------------- -->
+  <section class="section">
+    <div class="section-head">
+      <span class="num">04</span>
+      <h2>Fluctuating FPS</h2>
+      <span class="head-note">Lot-to-Lot</span>
+    </div>
+    <p class="lede">.22LR velocity swings 30–80 fps lot-to-lot, more in the cold. Slower = more hold. Scale your gun number straight-line off a chrono reading before trusting it past a ~100 fps shift:</p>
+    <div class="formula" style="margin-top:8px;font-size:11pt;">
+      Adjusted Gun # = Gun # × (Actual fps ÷ Reference fps)
+    </div>
+  </section>
+
+  <div class="bracket-box">
+    <div class="bb-title">My Gun Number — fill in after truing</div>
+    <div class="bb-grid">
+      <div class="bb-cell">
+        <div class="bb-tag">Gun #</div>
+        <div class="bb-line"><span class="rule-fill"></span></div>
+      </div>
+      <div class="bb-cell">
+        <div class="bb-tag">Ref. fps</div>
+        <div class="bb-line"><span class="rule-fill"></span>FPS</div>
+      </div>
+      <div class="bb-cell">
+        <div class="bb-tag">Ref. Range</div>
+        <div class="bb-line"><span class="rule-fill"></span>YD</div>
+      </div>
+      <div class="bb-cell">
+        <div class="bb-tag">Ref. Hold</div>
+        <div class="bb-line"><span class="rule-fill"></span>MIL</div>
+      </div>
+    </div>
+    <div class="callout">(Range ÷ 100) × Wind × Value ÷ Gun # = Hold</div>
+  </div>
+
+  <footer>
+    <span>Gun Number Pocket Card</span>
+    <span>Load / Date ________________</span>
+  </footer>
+
+</div>
+</body>
+</html>

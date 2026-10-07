@@ -70,6 +70,7 @@ const STATIC_PRECACHE = [
   "/icons/icon-192.png",
   "/icons/icon-512.png",
   "/print/wind-reading-field-card.html",
+  "/print/gun-number-card.html",
 ];
 
 function buildServiceWorker(routeUrls) {

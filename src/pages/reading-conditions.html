@@ -16,6 +16,7 @@ nav: reading-conditions
   <a href="#environment">03 Environment Gauge</a>
   <a href="#bracket">04 Wind Bracket</a>
   <a href="#hold">05 Bracket To Hold</a>
+  <a href="#gun-number">06 Gun Number</a>
 </nav>
 
 <!-- 01 -->
@@ -208,4 +209,119 @@ nav: reading-conditions
   </div>
 
   <p>Two claims worth naming and correcting, since they get repeated: wind drift does <b>not</b> scale with distance squared &mdash; going from 100 to 200 yards roughly doubles the hold, not quadruples it, because the angular MIL value divides the growing drift by the growing range. And there's no separately-named "wind formula shortcut" specific to rimfire circulating under any particular person's name &mdash; the generic range-times-wind-speed-over-a-constant shortcut long-range shooters use for centerfire doesn't have a verified constant for slow, rapidly-decelerating rimfire bullets, which is exactly why the table above comes from a full trajectory calculation instead of a mental-math shortcut.</p>
+</section>
+
+<!-- 06 -->
+<section class="section" id="gun-number">
+  <div class="section-head">
+    <span class="num">06</span>
+    <h2>Your Gun Number</h2>
+    <span class="head-note">Personal Constant</span>
+  </div>
+  <p class="lede">The centerfire long-range crowd carries a single "gun number" &mdash; a constant you divide into range&times;wind to get a mental-math hold, no app or table needed. The caution above still applies: there is no verified rimfire version of that constant you can borrow. But you can <b>build your own</b> from data you already trued, and it's accurate enough for a fast gut-check at the distances NRL22 actually shoots.</p>
+
+  <div class="caution">
+    <b>Yours, not universal</b>
+    This number is derived from one load, one zero, one altitude &mdash; your own. Change the bullet, the muzzle velocity, or move to a very different elevation and it stops being true. It is not the subsonic reference load's constant, and it is not transferable to someone else's rifle.
+  </div>
+
+  <h3 style="margin-top:20px;font-size:15px;">The Formula</h3>
+  <p>Solved for the one input you don't already have &mdash; the constant &mdash; using a <b>full-value (3/9 o'clock) hold you've already trued</b> at one reference distance:</p>
+  <table>
+    <tr><td class="c-speed" style="width:auto;"><span class="speed" style="font-size:12pt;">Gun Number&nbsp;=&nbsp;(Range&nbsp;&divide;&nbsp;100)&nbsp;&times;&nbsp;Wind(mph)&nbsp;&times;&nbsp;Value&nbsp;&divide;&nbsp;Hold(MIL)</span></td></tr>
+  </table>
+  <p>Once you have it, run the formula the other direction on the clock: <b>Hold(MIL) = (Range&nbsp;&divide;&nbsp;100) &times; Wind(mph) &times; Value &divide; Gun Number.</b> Range is in yards (hundreds of yards &times; wind &times; value), because that's the unit your reticle's MIL subtension math assumes &mdash; a metric gun number needs its own truing pass in meters, not a unit conversion of this one.</p>
+
+  <h3 style="margin-top:24px;font-size:15px;">Deriving It</h3>
+  <ol class="steps">
+    <li>Pick the one distance you shoot most &mdash; 100 yards is typical for NRL22 &mdash; and get a <b>trued, full-value, known-speed</b> wind hold there (from <a href="/kestrel-5700/">Kestrel 5700 Elite</a>, <a href="/ab-quantum/">AB Quantum</a>, or your own logged impacts).</li>
+    <li>Plug range, wind speed, value (1.0 for full value), and that trued hold into the formula above.</li>
+    <li>Round to one decimal. That's your gun number for this load, this zero, this elevation.</li>
+    <li>Check it against a second distance you've also trued. If it's off by more than a click or two, true that distance separately rather than trusting the constant across the board &mdash; see the worked check below for why.</li>
+  </ol>
+
+  <h3 style="margin-top:24px;font-size:15px;">Worked Example</h3>
+  <p>Using this page's own reference load and its trued 100-yard hold from the table in section 05 &mdash; 10 mph, full value, 1.2 MIL:</p>
+  <table>
+    <tr><td class="c-speed" style="width:auto;"><span class="speed" style="font-size:12pt;">(100 &divide; 100) &times; 10 &times; 1.0 &divide; 1.2&nbsp;=&nbsp;<b>8.3</b></span></td></tr>
+  </table>
+  <p>Reality check: predicting the rest of the reference table with gun number 8.3 instead of the full trajectory calculation &mdash;</p>
+  <table>
+    <thead>
+      <tr><th>Range</th><th>Table hold</th><th>Gun-number hold</th><th>Difference</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>50 yd</td><td>0.7 MIL</td><td>0.6 MIL</td><td>&minus;0.1</td></tr>
+      <tr><td>75 yd</td><td>0.9 MIL</td><td>0.9 MIL</td><td>0</td></tr>
+      <tr><td>100 yd</td><td>1.2 MIL</td><td>1.2 MIL</td><td>0 (reference point)</td></tr>
+      <tr><td>150 yd</td><td>1.7 MIL</td><td>1.8 MIL</td><td>+0.1</td></tr>
+      <tr><td>200 yd</td><td>2.2 MIL</td><td>2.4 MIL</td><td>+0.2</td></tr>
+    </tbody>
+  </table>
+  <p>Within a couple tenths of a MIL across the 50&ndash;200 yard band most NRL22 stages live in &mdash; close enough for a squad-line gut check on a wind call you haven't trued yet, not close enough to skip truing altogether. The drift grows with distance because a single constant can't fully capture a rimfire bullet's non-linear deceleration &mdash; the same reason section 05 above has no shortcut for a <i>universal</i> version of this number.</p>
+
+  <h3 style="margin-top:24px;font-size:15px;">Adjusting For Fluctuating FPS</h3>
+  <p>.22LR velocity swings lot-to-lot &mdash; 30&ndash;80 fps isn't unusual, and cold ammo can shoot meaningfully slower than warm. A slower bullet spends longer in the wind, so it needs <b>more</b> hold than your reference gun number predicts; a faster lot needs less. Scale the gun number itself, in direct proportion to the fps change:</p>
+  <table>
+    <tr><td class="c-speed" style="width:auto;"><span class="speed" style="font-size:12pt;">Adjusted Gun Number&nbsp;=&nbsp;Gun Number&nbsp;&times;&nbsp;(Actual FPS&nbsp;&divide;&nbsp;Reference FPS)</span></td></tr>
+  </table>
+
+  <div class="caution">
+    <b>Linear scaling, not a new trajectory</b>
+    This is a straight-line approximation around your reference velocity &mdash; good enough for the kind of lot-to-lot or cold-morning swing you'll actually see (tens of fps), not a substitute for re-running the real math. If a change is large (new bullet weight, a different box entirely, 100+ fps off), true a fresh reference hold in <a href="/kestrel-5700/">Kestrel 5700 Elite</a> or <a href="/ab-quantum/">AB Quantum</a> instead of trusting the scale-up.
+  </div>
+
+  <div class="fps-calc" id="fpsCalc">
+    <div class="fps-calc-title">FPS Adjustment Calculator</div>
+    <div class="fps-calc-grid">
+      <label>Your gun number
+        <input type="number" id="fpsGunNumber" value="8.3" step="0.1">
+      </label>
+      <label>Reference fps <small>(trued at)</small>
+        <input type="number" id="fpsReference" placeholder="e.g. 1050" step="1">
+      </label>
+      <label>Actual fps <small>(chrono today)</small>
+        <input type="number" id="fpsActual" placeholder="e.g. 1010" step="1">
+      </label>
+    </div>
+    <div class="fps-calc-result">
+      Adjusted gun number: <span id="fpsResult">&mdash;</span>
+    </div>
+  </div>
+  <style>
+    .fps-calc{margin-top:14px;border:1.2px solid var(--ink);padding:14px 16px;}
+    .fps-calc-title{font-family:var(--mono);font-size:7.5pt;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+    .fps-calc-grid{display:flex;flex-wrap:wrap;gap:14px;}
+    .fps-calc-grid label{flex:1 1 140px;display:flex;flex-direction:column;gap:5px;font-family:var(--mono);font-size:8pt;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+    .fps-calc-grid label small{text-transform:none;letter-spacing:0;font-family:var(--body);}
+    .fps-calc-grid input{font-family:var(--mono);font-size:13pt;color:var(--ink);border:none;border-bottom:1.2px solid var(--rule);padding:4px 2px;background:transparent;}
+    .fps-calc-grid input:focus{outline:none;border-bottom-color:var(--accent);}
+    .fps-calc-result{margin-top:14px;padding-top:10px;border-top:1px solid var(--hair);font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:15px;}
+    .fps-calc-result span{font-family:var(--mono);color:var(--accent);}
+  </style>
+  <script>
+    (function () {
+      var gunEl = document.getElementById("fpsGunNumber");
+      var refEl = document.getElementById("fpsReference");
+      var actEl = document.getElementById("fpsActual");
+      var outEl = document.getElementById("fpsResult");
+      if (!gunEl || !refEl || !actEl || !outEl) return;
+      function recalc() {
+        var gun = parseFloat(gunEl.value);
+        var ref = parseFloat(refEl.value);
+        var act = parseFloat(actEl.value);
+        if (!gun || !ref || !act) {
+          outEl.textContent = "—";
+          return;
+        }
+        outEl.textContent = (gun * (act / ref)).toFixed(1);
+      }
+      [gunEl, refEl, actEl].forEach(function (el) {
+        el.addEventListener("input", recalc);
+      });
+      recalc();
+    })();
+  </script>
+
+  <a class="print-link" href="/print/gun-number-card.html" target="_blank" rel="noopener">&#8595; Printable gun-number pocket card</a>
 </section>
